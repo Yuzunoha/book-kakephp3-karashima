@@ -15,10 +15,11 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 # 各種インストール
 RUN apt-get update \
   && apt-get install -y git zip unzip \
-  && apt-get install -y nodejs \
   && apt-get install -y sudo \
+  && apt-get install -y vim \
+  && apt-get install -y nodejs \
   && apt-get install -y libicu-dev \
-  && docker-php-ext-install pdo_mysql intl
+  && docker-php-ext-install pdo_mysql intl mbstring
 
 # ユーザ作成
 RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
