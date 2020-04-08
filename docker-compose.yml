@@ -25,14 +25,3 @@ services:
     volumes:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/mysql/data:/var/lib/mysql
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_ARBITRARY: 1
-      PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: root
-    ports:
-      - 10040:80
-    volumes:
-      - ./docker/phpmyadmin/sessions:/sessions
