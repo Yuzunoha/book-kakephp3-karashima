@@ -1,4 +1,4 @@
-FROM php:7-fpm
+FROM php:7.3-fpm
 
 # 1000を適宜変更し、hostのuidにguestのuidを合わせる
 # ホスト側でidコマンドを打って調べたuidの値にする
@@ -14,10 +14,11 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 
 # 各種インストール
 RUN apt-get update \
-  && docker-php-ext-install pdo_mysql \
   && apt-get install -y git zip unzip \
   && apt-get install -y nodejs \
-  && apt-get install -y sudo
+  && apt-get install -y sudo \
+  && apt-get install -y libicu-dev \
+  && docker-php-ext-install pdo_mysql intl
 
 # ユーザ作成
 RUN useradd -m --uid ${DOCKER_UID} --groups sudo ${DOCKER_USER} \
