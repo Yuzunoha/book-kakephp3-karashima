@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -57,7 +58,8 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $this->set(compact('message'));
+        // viewに変数を渡している
+        $this->set(compact('message')); // 同義 : $this->set('message', $message); 
     }
 
     /**
