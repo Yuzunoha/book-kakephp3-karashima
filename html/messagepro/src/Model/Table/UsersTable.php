@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -58,7 +59,7 @@ class UsersTable extends Table
             ->maxLength('username', 64)
             ->requirePresence('username', 'create')
             ->notEmptyString('username')
-            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table', 'message' => 'このユーザ名は既に使われています']);
 
         $validator
             ->scalar('password')
