@@ -8,6 +8,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Message'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="messages index large-9 medium-8 columns content">
@@ -17,6 +21,8 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('category_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('create_datetime') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -27,6 +33,8 @@
             <tr>
                 <td><?= $this->Number->format($message->id) ?></td>
                 <td><?= $this->Number->format($message->status) ?></td>
+                <td><?= $message->has('user') ? $this->Html->link($message->user->id, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
+                <td><?= $message->has('category') ? $this->Html->link($message->category->name, ['controller' => 'Categories', 'action' => 'view', $message->category->id]) : '' ?></td>
                 <td><?= h($message->title) ?></td>
                 <td><?= h($message->create_datetime) ?></td>
                 <td class="actions">

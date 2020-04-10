@@ -20,6 +20,9 @@ class MessagesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users', 'Categories'],
+        ];
         $messages = $this->paginate($this->Messages);
 
         $this->set(compact('messages'));
@@ -35,7 +38,7 @@ class MessagesController extends AppController
     public function view($id = null)
     {
         $message = $this->Messages->get($id, [
-            'contain' => [],
+            'contain' => ['Users', 'Categories'],
         ]);
 
         $this->set('message', $message);
@@ -58,8 +61,9 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        // viewに変数を渡している
-        $this->set(compact('message')); // 同義 : $this->set('message', $message); 
+        $users = $this->Messages->Users->find('list', ['limit' => 200]);
+        $categories = $this->Messages->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('message', 'users', 'categories'));
     }
 
     /**
@@ -83,7 +87,9 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $this->set(compact('message'));
+        $users = $this->Messages->Users->find('list', ['limit' => 200]);
+        $categories = $this->Messages->Categories->find('list', ['limit' => 200]);
+        $this->set(compact('message', 'users', 'categories'));
     }
 
     /**

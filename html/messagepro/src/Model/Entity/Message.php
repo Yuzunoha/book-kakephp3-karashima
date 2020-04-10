@@ -8,9 +8,14 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $status
+ * @property int $user_id
+ * @property int $category_id
  * @property string $title
  * @property string|null $body
  * @property \Cake\I18n\FrozenTime|null $create_datetime
+ *
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Category $category
  */
 class Message extends Entity
 {
@@ -25,8 +30,12 @@ class Message extends Entity
      */
     protected $_accessible = [
         'status' => true,
+        'user_id' => true,
+        'category_id' => true,
         'title' => true,
         'body' => true,
         'create_datetime' => true,
+        'user' => true,
+        'category' => true,
     ];
 }
