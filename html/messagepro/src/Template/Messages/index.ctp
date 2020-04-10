@@ -16,8 +16,6 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('category_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('create_datetime') ?></th>
@@ -28,8 +26,6 @@
             <?php foreach ($messages as $message): ?>
             <tr>
                 <td><?= $this->Number->format($message->id) ?></td>
-                <td><?= $this->Number->format($message->user_id) ?></td>
-                <td><?= $this->Number->format($message->category_id) ?></td>
                 <td><?= $this->Number->format($message->status) ?></td>
                 <td><?= h($message->title) ?></td>
                 <td><?= h($message->create_datetime) ?></td>

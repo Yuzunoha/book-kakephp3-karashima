@@ -19,9 +19,6 @@ class MessagesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users', 'Categories'],
-        ];
         $messages = $this->paginate($this->Messages);
 
         $this->set(compact('messages'));
@@ -37,7 +34,7 @@ class MessagesController extends AppController
     public function view($id = null)
     {
         $message = $this->Messages->get($id, [
-            'contain' => ['Users', 'Categories'],
+            'contain' => [],
         ]);
 
         $this->set('message', $message);
@@ -60,9 +57,7 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $users = $this->Messages->Users->find('list', ['limit' => 200]);
-        $categories = $this->Messages->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('message', 'users', 'categories'));
+        $this->set(compact('message'));
     }
 
     /**
@@ -86,9 +81,7 @@ class MessagesController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        $users = $this->Messages->Users->find('list', ['limit' => 200]);
-        $categories = $this->Messages->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('message', 'users', 'categories'));
+        $this->set(compact('message'));
     }
 
     /**

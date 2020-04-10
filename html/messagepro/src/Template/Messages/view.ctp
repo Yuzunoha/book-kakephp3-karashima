@@ -25,14 +25,6 @@
             <td><?= $this->Number->format($message->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('User Id') ?></th>
-            <td><?= $this->Number->format($message->user_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Category Id') ?></th>
-            <td><?= $this->Number->format($message->category_id) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Status') ?></th>
             <td><?= $this->Number->format($message->status) ?></td>
         </tr>

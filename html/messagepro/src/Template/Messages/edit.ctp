@@ -21,8 +21,6 @@
     <fieldset>
         <legend><?= __('Edit Message') ?></legend>
         <?php
-            echo $this->Form->control('user_id');
-            echo $this->Form->control('category_id');
             echo $this->Form->control('status');
             echo $this->Form->control('title');
             echo $this->Form->control('body');
