@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $user->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Messages'), ['controller' => 'Messages', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Message'), ['controller' => 'Messages', 'action' => 'add']) ?></li>
@@ -23,12 +24,12 @@
     <fieldset>
         <legend><?= __('Edit User') ?></legend>
         <?php
-            echo $this->Form->control('username');
-            echo $this->Form->control('password');
-            echo $this->Form->control('status');
-            echo $this->Form->control('role');
-            echo $this->Form->control('pr');
-            echo $this->Form->control('create_datetime', ['empty' => true]);
+        echo $this->Form->control('username');
+        // echo $this->Form->control('password'); コメントアウトしないと二重にhash化されるらしい
+        echo $this->Form->control('status');
+        echo $this->Form->control('role');
+        echo $this->Form->control('pr');
+        echo $this->Form->control('create_datetime', ['empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
