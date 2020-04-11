@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Member $member
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $member->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $member->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Members'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
@@ -21,10 +22,10 @@
     <fieldset>
         <legend><?= __('Edit Member') ?></legend>
         <?php
-            echo $this->Form->control('membername');
-            echo $this->Form->control('memberpass');
-            echo $this->Form->control('pr');
-            echo $this->Form->control('create_datetime', ['empty' => true]);
+        echo $this->Form->control('membername');
+        echo $this->Form->control('memberpass', ['type' => 'password']);
+        echo $this->Form->control('pr');
+        echo $this->Form->control('create_datetime', ['empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -43,6 +43,27 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'userModel' => 'Members',
+                    'fields' => [
+                        'username' => 'membername',
+                        'password' => 'memberpass'
+                    ]
+                ]
+            ],
+            'loginAction' => '/members/login',
+            'logoutRedirect' => [
+                'controller' => 'Members',
+                'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'Messages',
+                'action' => 'index'
+            ]
+        ]);
+
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);

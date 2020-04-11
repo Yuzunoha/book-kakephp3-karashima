@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Members Controller
@@ -12,6 +14,26 @@ use App\Controller\AppController;
  */
 class MembersController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add', 'logout']);
+    }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $member = $this->Auth->identify();
+            if ($member) {
+                $this->Auth->setUser($member);
+
+                $redirectUrl = $this->Auth->redirectUrl();
+                return $this->redirect($redirectUrl);
+            }
+            $this->Flash->error('ユーザ名かパスワードが違います');
+        }
+    }
+
     /**
      * Index method
      *
@@ -51,9 +73,9 @@ class MembersController extends AppController
         if ($this->request->is('post')) {
             $member = $this->Members->patchEntity($member, $this->request->getData());
             if ($this->Members->save($member)) {
-                $this->Flash->success(__('The member has been saved.'));
+                $this->Flash->success(__('登録しました。メンバ名とパスワードでログインしてください'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
             $this->Flash->error(__('The member could not be saved. Please, try again.'));
         }

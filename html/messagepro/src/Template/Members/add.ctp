@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Member $member
@@ -15,10 +16,10 @@
     <fieldset>
         <legend><?= __('Add Member') ?></legend>
         <?php
-            echo $this->Form->control('membername');
-            echo $this->Form->control('memberpass');
-            echo $this->Form->control('pr');
-            echo $this->Form->control('create_datetime', ['empty' => true]);
+        echo $this->Form->control('membername');
+        echo $this->Form->control('memberpass', ['type' => 'password']);
+        echo $this->Form->control('pr');
+        echo $this->Form->control('create_datetime', ['empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
