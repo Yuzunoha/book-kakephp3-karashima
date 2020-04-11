@@ -43,6 +43,7 @@ class AppController extends Controller
     {
         parent::initialize();
 
+        /*
         $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
@@ -63,6 +64,7 @@ class AppController extends Controller
                 'action' => 'index'
             ]
         ]);
+        */
 
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
