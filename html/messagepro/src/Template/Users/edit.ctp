@@ -26,8 +26,6 @@
         <?php
         echo $this->Form->control('username');
         // echo $this->Form->control('password'); コメントアウトしないと二重にhash化されるらしい
-        echo $this->Form->control('status');
-        echo $this->Form->control('role');
         echo $this->Form->control('pr');
         echo $this->Form->control('create_datetime', ['empty' => true]);
         ?>

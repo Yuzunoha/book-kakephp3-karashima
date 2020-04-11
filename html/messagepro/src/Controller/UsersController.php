@@ -76,6 +76,9 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity();
+        $user = $this->Users->patchEntity($user, $this->request->getData());
+        $user->status = 1;
+        $user->role = 'user';
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -94,8 +97,9 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit()
     {
+        $id = $this->Auth->user('id');
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
@@ -104,7 +108,8 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                // redirect: http://localhost:8765/users/view/5
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -118,16 +123,18 @@ class UsersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete()
     {
+        $id = $this->Auth->user('id');
         $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
+        $user = $this->Users->newEntity();
+        $user->id = $id;
+        $user->status = 2;
+        if ($this->Users->save($user)) {
             $this->Flash->success(__('The user has been deleted.'));
+            return $this->redirect(['action' => 'logout']);
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
     }
 }

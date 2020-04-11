@@ -77,6 +77,11 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
             'loginRedirect' => [
                 'controller' => 'Messages',
                 'action' => 'index',

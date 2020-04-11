@@ -111,4 +111,10 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
+        $query->where(['Users.status' => 1]);
+        return $query;
+    }
 }
