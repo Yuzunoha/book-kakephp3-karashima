@@ -14,6 +14,21 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        if ($this->request->getParam('action') === 'index') {
+            /* indexアクションである */
+            if (isset($user['role']) && $user['role'] === 'admin') {
+                /* roleがadminである */
+                return true;
+            }
+            /* roleがadminでない */
+            return false;
+        }
+        /* indexアクションでない */
+        return true;
+    }
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

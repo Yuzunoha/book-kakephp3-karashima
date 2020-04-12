@@ -77,6 +77,7 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
                     'finder' => 'auth'
@@ -87,5 +88,13 @@ class AppController extends Controller
                 'action' => 'index',
             ]
         ]);
+    }
+
+    public function isAuthorized($user)
+    {
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        return false;
     }
 }

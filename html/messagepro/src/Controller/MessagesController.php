@@ -13,6 +13,11 @@ use App\Controller\AppController;
  */
 class MessagesController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+
     /**
      * Index method
      *
