@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Message $message
@@ -22,11 +23,11 @@
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('User') ?></th>
-            <td><?= $message->has('user') ? $this->Html->link($message->user->id, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
+            <td><?= $message->has('user') ? $this->Html->link($message->user->username, ['controller' => 'Users', 'action' => 'view', $message->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Category') ?></th>
-            <td><?= $message->has('category') ? $this->Html->link($message->category->name, ['controller' => 'Categories', 'action' => 'view', $message->category->id]) : '' ?></td>
+            <td><?= $message->has('category') ? h($message->category->name) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Title') ?></th>

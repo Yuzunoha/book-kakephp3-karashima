@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Message $message
@@ -19,12 +20,9 @@
     <fieldset>
         <legend><?= __('Add Message') ?></legend>
         <?php
-            echo $this->Form->control('status');
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('category_id', ['options' => $categories]);
-            echo $this->Form->control('title');
-            echo $this->Form->control('body');
-            echo $this->Form->control('create_datetime', ['empty' => true]);
+        echo $this->Form->control('category_id', ['options' => $categories]);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
