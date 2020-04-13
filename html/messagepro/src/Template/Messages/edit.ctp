@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Message $message
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $message->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $message->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Messages'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
@@ -25,12 +26,9 @@
     <fieldset>
         <legend><?= __('Edit Message') ?></legend>
         <?php
-            echo $this->Form->control('status');
-            echo $this->Form->control('user_id', ['options' => $users]);
-            echo $this->Form->control('category_id', ['options' => $categories]);
-            echo $this->Form->control('title');
-            echo $this->Form->control('body');
-            echo $this->Form->control('create_datetime', ['empty' => true]);
+        echo $this->Form->control('category_id', ['options' => $categories]);
+        echo $this->Form->control('title');
+        echo $this->Form->control('body');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -25,12 +25,14 @@ class MessagesController extends AppController
      */
     public function index()
     {
+        $conditions = array('Messages.status' => 1, 'Users.status' => 1);
         $this->paginate = [
             'contain' => ['Users', 'Categories'],
+            'conditions' => $conditions
         ];
         $messages = $this->paginate($this->Messages);
-
-        $this->set(compact('messages'));
+        $auth_user_id = $this->Auth->user('id');
+        $this->set(compact('messages', 'auth_user_id'));
     }
 
     /**
@@ -85,8 +87,15 @@ class MessagesController extends AppController
     public function edit($id = null)
     {
         $message = $this->Messages->get($id, [
-            'contain' => [],
+            'contain' => ['Users'],
         ]);
+        if (
+            $message->status !== 1 or
+            $message->user->status !== 1 or
+            $message->user_id !== $this->Auth->user('id')
+        ) {
+            $this->render('/Original/invalid');
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $message = $this->Messages->patchEntity($message, $this->request->getData());
             if ($this->Messages->save($message)) {
@@ -111,13 +120,21 @@ class MessagesController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $message = $this->Messages->get($id);
-        if ($this->Messages->delete($message)) {
+        $message = $this->Messages->get($id, ['contain' => ['Users']]);
+        if (
+            $message->status !== 1 or
+            $message->user->status !== 1 or
+            $message->user_id !== $this->Auth->user('id')
+        ) {
+            $this->render('/original/invalid');
+            return;
+        }
+        $message->status = 2;
+        if ($this->Messages->save($message)) {
             $this->Flash->success(__('The message has been deleted.'));
         } else {
             $this->Flash->error(__('The message could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }
